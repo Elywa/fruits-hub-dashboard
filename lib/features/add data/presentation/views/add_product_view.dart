@@ -6,6 +6,9 @@ class AddProductView extends StatelessWidget {
   static const routeName = 'add-product';
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: AddProductViewBody());
+    return Scaffold(
+      appBar: AppBar(centerTitle: true, title: const Text('Add Product')),
+      body: AddProductViewBody(),
+    );
   }
 }
