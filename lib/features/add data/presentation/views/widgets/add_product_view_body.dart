@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:fruits_hub_dash_board/core/widgets/custom_button.dart';
+import 'package:fruits_hub_dash_board/features/add%20data/domain/entity/add_product_input_entity.dart';
 import 'package:fruits_hub_dash_board/features/add%20data/presentation/views/widgets/custom_image_field.dart';
 import 'package:fruits_hub_dash_board/features/add%20data/presentation/views/widgets/custom_text_form_field.dart';
 import 'package:fruits_hub_dash_board/features/add%20data/presentation/views/widgets/is_featured.dart';
@@ -85,6 +86,15 @@ class _AddProductViewBodyState extends State<AddProductViewBody> {
                   if (image != null) {
                     if (formKey.currentState!.validate()) {
                       formKey.currentState!.save();
+
+                      AddProductInputEntity(
+                        name: name,
+                        code: code,
+                        description: description,
+                        price: price,
+                        image: image!,
+                        isFeatured: isFeatured,
+                      );
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(content: Text("Product added successfully!")),
                       );
