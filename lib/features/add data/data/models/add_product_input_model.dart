@@ -10,8 +10,16 @@ class AddProductInputModel {
   final File image;
   String? imageUrl;
   final bool isFeatured;
-
+  final bool isOrganic = false;
+  final int expirationMonths;
+  final int numOfCalories;
+  final int unitAmount;
+  final num avgRating = 0;
+  final num ratingCount = 0;
   AddProductInputModel({
+    required this.expirationMonths,
+    required this.numOfCalories,
+    required this.unitAmount,
     required this.name,
     required this.code,
     required this.description,
@@ -32,6 +40,9 @@ class AddProductInputModel {
       image: addProductInputEntity.image,
       imageUrl: addProductInputEntity.imageUrl,
       isFeatured: addProductInputEntity.isFeatured,
+      expirationMonths: addProductInputEntity.expirationMonths,
+      numOfCalories: addProductInputEntity.numOfCalories,
+      unitAmount: addProductInputEntity.unitAmount,
     );
   }
 
@@ -43,7 +54,10 @@ class AddProductInputModel {
       'price': price,
       'imageUrl': imageUrl,
       'isFeatured': isFeatured,
-      'image': image.path, // Assuming you want to store the path of the image
+      'isOrganic': isOrganic,
+      'expirationDate': expirationMonths,
+      'numOfCalories': numOfCalories,
+      'unitAmount': unitAmount,
     };
   }
 }

@@ -1,8 +1,10 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruits_hub_dash_board/core/widgets/custom_button.dart';
 import 'package:fruits_hub_dash_board/features/add%20data/domain/entity/add_product_input_entity.dart';
+import 'package:fruits_hub_dash_board/features/add%20data/presentation/manager/cubit/add_product_cubit.dart';
 import 'package:fruits_hub_dash_board/features/add%20data/presentation/views/widgets/custom_image_field.dart';
 import 'package:fruits_hub_dash_board/features/add%20data/presentation/views/widgets/custom_text_form_field.dart';
 import 'package:fruits_hub_dash_board/features/add%20data/presentation/views/widgets/is_featured.dart';
@@ -95,6 +97,7 @@ class _AddProductViewBodyState extends State<AddProductViewBody> {
                         image: image!,
                         isFeatured: isFeatured,
                       );
+                      context.read<AddProductCubit>().addProduct(input);
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(content: Text("Product added successfully!")),
                       );
