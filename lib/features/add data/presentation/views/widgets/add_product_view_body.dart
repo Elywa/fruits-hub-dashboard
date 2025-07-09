@@ -8,6 +8,7 @@ import 'package:fruits_hub_dash_board/features/add%20data/presentation/manager/c
 import 'package:fruits_hub_dash_board/features/add%20data/presentation/views/widgets/custom_image_field.dart';
 import 'package:fruits_hub_dash_board/features/add%20data/presentation/views/widgets/custom_text_form_field.dart';
 import 'package:fruits_hub_dash_board/features/add%20data/presentation/views/widgets/is_featured.dart';
+import 'package:fruits_hub_dash_board/features/add%20data/presentation/views/widgets/is_organic.dart';
 
 class AddProductViewBody extends StatefulWidget {
   const AddProductViewBody({super.key});
@@ -20,9 +21,11 @@ class _AddProductViewBodyState extends State<AddProductViewBody> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   AutovalidateMode autoValidateMode = AutovalidateMode.disabled;
   late String name, code, description;
-  late num price;
+  late num price, expirationMonths, numOfCalories, unitAmount;
   File? image;
+  // Example value, adjust as needed
   bool isFeatured = false;
+  bool isOrganic = false;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -63,16 +66,50 @@ class _AddProductViewBodyState extends State<AddProductViewBody> {
               SizedBox(height: 16),
 
               CustomTextFormField(
+                hint: "Expiration Date (in months)",
+                keyboardType: TextInputType.number,
+                onSaved: (value) {
+                  expirationMonths = num.parse(value!);
+                },
+              ),
+              SizedBox(height: 16),
+
+              CustomTextFormField(
+                hint: "Number of Calories",
+                keyboardType: TextInputType.number,
+                onSaved: (value) {
+                  numOfCalories = num.parse(value!);
+                },
+              ),
+              SizedBox(height: 16),
+
+              CustomTextFormField(
+                hint: "Unit Amount",
+                keyboardType: TextInputType.number,
+                onSaved: (value) {
+                  unitAmount = num.parse(value!);
+                },
+              ),
+              SizedBox(height: 16),
+
+              CustomTextFormField(
                 hint: "Product Description",
                 onSaved: (value) {
                   description = value!;
                 },
                 maxLines: 5,
               ),
+
               SizedBox(height: 16),
               IsFeatured(
                 onChanged: (value) {
                   isFeatured = value;
+                },
+              ),
+              SizedBox(height: 16),
+              IsOrganic(
+                onChanged: (value) {
+                  isOrganic = value;
                 },
               ),
               SizedBox(height: 16),
@@ -90,6 +127,11 @@ class _AddProductViewBodyState extends State<AddProductViewBody> {
                       formKey.currentState!.save();
 
                       AddProductInputEntity input = AddProductInputEntity(
+                        reviewEntity: [],
+                        expirationMonths: expirationMonths.toInt(),
+                        numOfCalories: numOfCalories.toInt(),
+                        unitAmount: unitAmount.toInt(),
+                        isOrganic: isOrganic,
                         name: name,
                         code: code,
                         description: description,

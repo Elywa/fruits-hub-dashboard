@@ -1,6 +1,8 @@
 import 'dart:io';
 
+import 'package:fruits_hub_dash_board/features/add%20data/data/models/review_model.dart';
 import 'package:fruits_hub_dash_board/features/add%20data/domain/entity/add_product_input_entity.dart';
+import 'package:fruits_hub_dash_board/features/add%20data/domain/entity/review_entity.dart';
 
 class AddProductInputModel {
   final String name;
@@ -10,13 +12,15 @@ class AddProductInputModel {
   final File image;
   String? imageUrl;
   final bool isFeatured;
-  final bool isOrganic = false;
+  final bool isOrganic;
   final int expirationMonths;
   final int numOfCalories;
   final int unitAmount;
+  final List<ReviewModel> reviews;
   final num avgRating = 0;
   final num ratingCount = 0;
   AddProductInputModel({
+    required this.reviews,
     required this.expirationMonths,
     required this.numOfCalories,
     required this.unitAmount,
@@ -27,12 +31,17 @@ class AddProductInputModel {
     required this.image,
     this.imageUrl,
     required this.isFeatured,
+    required this.isOrganic,
   });
 
   factory AddProductInputModel.fromJson(
     AddProductInputEntity addProductInputEntity,
   ) {
     return AddProductInputModel(
+      reviews:
+          addProductInputEntity.reviewEntity
+              .map((reviewEntity) => ReviewModel.fromEntity(reviewEntity))
+              .toList(),
       name: addProductInputEntity.name,
       code: addProductInputEntity.code,
       description: addProductInputEntity.description,
@@ -43,6 +52,7 @@ class AddProductInputModel {
       expirationMonths: addProductInputEntity.expirationMonths,
       numOfCalories: addProductInputEntity.numOfCalories,
       unitAmount: addProductInputEntity.unitAmount,
+      isOrganic: addProductInputEntity.isOrganic,
     );
   }
 
@@ -58,6 +68,7 @@ class AddProductInputModel {
       'expirationDate': expirationMonths,
       'numOfCalories': numOfCalories,
       'unitAmount': unitAmount,
+      reviews: reviews.map((review) => review.toJson()).toList(),
     };
   }
 }

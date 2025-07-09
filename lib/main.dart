@@ -4,11 +4,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruits_hub_dash_board/core/functions/routing.dart';
 import 'package:fruits_hub_dash_board/core/services/custom_bloc_observer.dart';
 import 'package:fruits_hub_dash_board/core/services/get_it_service.dart';
+import 'package:fruits_hub_dash_board/core/services/supabase_storage_service.dart';
+
 import 'package:fruits_hub_dash_board/features/dashboard/presentation/views/dashboard_view.dart';
 import 'package:fruits_hub_dash_board/firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await SupabaseStorageService.initSupabaseStorageService();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   Bloc.observer = CustomBlocObserver();
   setupGetIt();
