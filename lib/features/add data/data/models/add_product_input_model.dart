@@ -19,6 +19,7 @@ class AddProductInputModel {
   final List<ReviewModel> reviews;
   final num avgRating = 0;
   final num ratingCount = 0;
+  final int sellingCount;
   AddProductInputModel({
     required this.reviews,
     required this.expirationMonths,
@@ -32,6 +33,7 @@ class AddProductInputModel {
     this.imageUrl,
     required this.isFeatured,
     required this.isOrganic,
+    this.sellingCount = 0,
   });
 
   factory AddProductInputModel.fromJson(
@@ -68,7 +70,8 @@ class AddProductInputModel {
       'expirationDate': expirationMonths,
       'numOfCalories': numOfCalories,
       'unitAmount': unitAmount,
-      reviews: reviews.map((review) => review.toJson()).toList(),
+      "reviews": reviews.map((review) => review.toJson()).toList(),
+      "sellingCount": sellingCount,
     };
   }
 }

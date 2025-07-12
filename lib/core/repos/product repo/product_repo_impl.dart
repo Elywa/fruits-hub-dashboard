@@ -21,7 +21,7 @@ class ProductRepoImpl implements ProductRepo {
       );
       return right(null);
     } catch (e) {
-      return left(ServerFailure("Add product failed: $e"));
+      return left(ServerFailure("Add product failed in product repo impl: $e"));
     }
   }
 }

@@ -12,6 +12,7 @@ import 'package:fruits_hub_dash_board/firebase_options.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SupabaseStorageService.initSupabaseStorageService();
+  await SupabaseStorageService.createBucket('fruits_images');
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   Bloc.observer = CustomBlocObserver();
   setupGetIt();
